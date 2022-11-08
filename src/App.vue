@@ -15,14 +15,18 @@ console.log(input.value)
         class="main-input"
     >
       <template #prepend>
-        <el-button :icon="Search"/>
+        <el-button>
+          <el-icon>
+            <Search/>
+          </el-icon>
+        </el-button>
       </template>
     </el-input>
   </div>
 </template>
 
 <style scoped>
-.main-input{
+.main-input {
   text-align: center;
   width: 780px;
 }
