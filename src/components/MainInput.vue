@@ -14,21 +14,51 @@
           </el-icon>
         </el-button>
       </template>
+      <template v-if="showAppendButton" #append>
+        <!--        <el-button v-model="saveCommand">-->
+        <!--          <el-icon><CirclePlus /></el-icon>-->
+        <!--        </el-button>-->
+        <el-button @click="doCopy">
+          <el-icon>
+            <CopyDocument/>
+          </el-icon>
+        </el-button>
+      </template>
     </el-input>
   </div>
 </template>
 
 <script>
+import {ElNotification} from "element-plus";
+
 export default {
   name: "MainInput",
   data() {
     return {
-      input: ""
+      input: "",
+      showAppendButton: false
     }
   },
   methods: {
-    inputChange(){
-      console.log(2333)
+    //输入框内容变更
+    inputChange() {
+      this.showAppendButton = this.input !== '';
+    },
+    //保存命令到本地
+    // saveCommand() {
+    //   localStorage.setItem('command1',this.input)
+    // },
+    //复制输入框内容
+    doCopy: function () {
+      this.$copyText(this.input).then(function (e) {
+        //弹窗
+        ElNotification.success({
+          title: '已复制命令',
+          showClose: false
+        })
+      }, function (e) {
+        console.log(e)
+      })
     }
   }
 }
