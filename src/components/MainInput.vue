@@ -68,5 +68,22 @@ export default {
 .main-input {
   text-align: center;
   width: 780px;
+
 }
+/*输入框前缀*/
+:deep(.el-input-group__prepend) {
+  border-top-left-radius: 18px;
+  border-bottom-left-radius: 18px;
+}
+/*输入框后缀*/
+:deep(.el-input-group__append) {
+  border-top-right-radius: 18px;
+  border-bottom-right-radius: 18px;
+}
+/*输入框本体*/
+:deep(.el-input__wrapper) {
+  border-top-right-radius: 18px;
+  border-bottom-right-radius: 18px;
+}
+
 </style>
