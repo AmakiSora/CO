@@ -1,15 +1,15 @@
 <template>
   <div class="command-storage">
-    <el-button v-for="command in commands" round>
-      {{ command }}
+    <el-button v-for="command in commands" @click="selectCommand(command.name)" round>
+      {{ command.name }}
     </el-button>
     <el-button type="plain" @click="saveCommand" round>+</el-button>
   </div>
 </template>
 
 <script>
-import {ElNotification} from "element-plus";
-import { mapState } from 'vuex'
+import {mapState} from 'vuex'
+
 export default {
   name: "CommandStorage",
   data() {
@@ -20,8 +20,13 @@ export default {
   methods: {
     // 保存命令到本地
     saveCommand() {
-      // const commands = localStorage.getItem('commands');
-      // localStorage.setItem('commands',233)
+      const commands = localStorage.getItem('commands');
+      // const c = [{assss:2}]
+      // c.push({name: '244',command:})
+      localStorage.setItem('commands', 233)
+    },
+    selectCommand(name) {
+      this.$store.state.changeCommand()
     }
   },
   computed: mapState({
@@ -40,7 +45,7 @@ export default {
 </script>
 
 <style scoped>
-.command-storage{
+.command-storage {
   margin: 20px;
 }
 </style>

@@ -1,22 +1,27 @@
 // 组装模块并导出 store 的地方
-import {createApp} from 'vue'
 import {createStore} from 'vuex'
 
 // 创建一个新的 store 实例
 const store = createStore({
     state: {
+        command: 'docker ps1',
         commands: [
-            "123", "233", "2333"
+            {name: '命令1', command: 'docker ps'},
+            {name: '命令2', command: 'docker run'},
         ]
     },
     actions: {
-        save(context) {
-            context.commit('increment')
+        changeCommand(context,text) {
+            console.log(2222222222222)
+            context.commit('changeCommand',text)
         }
     },
     mutations: {
-        increment(state) {
-            state.count++
+        changeCommand1(state, command) {
+            state.command = command
+        },
+        addCommand(state, name, command) {
+            state.commands.push({name: name, command: command})
         }
     }
 })
