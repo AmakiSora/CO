@@ -14,7 +14,7 @@
           </el-icon>
         </el-button>
       </template>
-      <template v-if="showAppendButton" #append>
+      <template v-if="showCopyButton" #append>
         <!--        <el-button v-model="saveCommand">-->
         <!--          <el-icon><CirclePlus /></el-icon>-->
         <!--        </el-button>-->
@@ -30,25 +30,22 @@
 
 <script>
 import {ElNotification} from "element-plus";
+import {store} from "../store/store";
 
 export default {
   name: "MainInput",
   data() {
     return {
-      input: "",
-      showAppendButton: false
+      input: store.cmdText,
+      showCopyButton: false
     }
   },
   methods: {
     //输入框内容变更
     inputChange() {
-      this.showAppendButton = this.input !== '';
-      this.$store.state.changeCommand('command', this.input)
+      this.showCopyButton = this.input !== ''
+      store.changeText(this.input)
     },
-    //保存命令到本地
-    // saveCommand() {
-    //   localStorage.setItem('command1',this.input)
-    // },
     //复制输入框内容
     doCopy: function () {
       this.$copyText(this.input).then(function (e) {
