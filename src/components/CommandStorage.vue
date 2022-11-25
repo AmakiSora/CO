@@ -18,6 +18,10 @@ export default {
       commands: localStorage.getItem('commands'),
     }
   },
+  mounted() {
+    console.log(`the component is now mounted.`)
+    store.initCmdList()
+  },
   methods: {
     // 保存命令到本地
     saveCommand() {
@@ -36,19 +40,19 @@ export default {
         center: true,
         showClose: false
       })
-          .then(({name}) => {
-            store.saveCmd(name)
+          .then(({value}) => {
+            store.saveCmd(value)
             ElNotification.success({
               title: '已保存命令',
               showClose: false
             })
           })
-          .catch(() => {
-            // ElMessage({
-            //   type: 'info',
-            //   message: 'Input canceled',
-            // })
-          })
+      // .catch(() => {
+      // ElMessage({
+      //   type: 'info',
+      //   message: 'Input canceled',
+      // })
+      // })
     }
   }
 }
