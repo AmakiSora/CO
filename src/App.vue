@@ -1,16 +1,15 @@
 <script>
 import {RouterLink, RouterView} from 'vue-router'
 import {ref} from 'vue'
-import MainInput from "./components/MainInput.vue";
-import CommandStorage from "./components/CommandStorage.vue";
+import CMD from "./views/CMD.vue";
 export default {
-  components: {CommandStorage, MainInput}
+  components: {CMD}
 }
+
 </script>
 
 <template>
-  <MainInput></MainInput>
-  <CommandStorage></CommandStorage>
+  <CMD></CMD>
 </template>
 
 <style scoped>

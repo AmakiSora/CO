@@ -57,7 +57,12 @@ export default {
       }, function (e) {
         console.log(e)
       })
-    }
+    },
+    //输入框内容变更
+    ChangeText(text) {
+      this.input = text
+      this.showCopyButton = this.input !== ''
+    },
   }
 }
 </script>

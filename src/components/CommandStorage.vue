@@ -1,8 +1,8 @@
 <template>
   <div class="command-storage">
-    <!--    <el-button v-for="command in commands" @click="selectCommand(command.name)" round>-->
-    <!--      {{ command.name }}-->
-    <!--    </el-button>-->
+    <el-button v-for="(command,name) in commands" @click="showCmd(name)" round>
+      {{ name }}
+    </el-button>
     <el-button type="plain" @click="saveCommand" round>+</el-button>
   </div>
 </template>
@@ -15,22 +15,17 @@ export default {
   name: "CommandStorage",
   data() {
     return {
-      commands: localStorage.getItem('commands'),
+      commands: {}
     }
   },
+  //初始化
   mounted() {
-    console.log(`the component is now mounted.`)
     store.initCmdList()
+    this.commands = store.cmdMap
   },
   methods: {
     // 保存命令到本地
     saveCommand() {
-      // const commands = localStorage.getItem('commands');
-      // const c = [{assss:2}]
-      // c.push({name: '244',command:})
-      // localStorage.setItem('commands', 233)
-      console.log(store.cmdText)
-      // store.changeText('2322')
       ElMessageBox.prompt('', {
         title: '命令另存为',
         message: '',
@@ -53,6 +48,11 @@ export default {
       //   message: 'Input canceled',
       // })
       // })
+    },
+    //展示命令
+    showCmd(name) {
+      const cmd = store.getCmdByName(name)
+      this.$parent.ChangeInputText(cmd)
     }
   }
 }

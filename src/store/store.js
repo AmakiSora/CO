@@ -3,19 +3,18 @@ import {reactive} from 'vue'
 export const store = reactive({
     cmdName: '',
     cmdText: '',
-    cmdList: [
-        {cmdName: '', cmdText: ''}
-    ],
+    cmdMap: {
+        cmdName: ''
+    },
     //初始化cmdList
     initCmdList() {
-        let list = localStorage.getItem('cmdList')
-        console.log(list)
-        if (list === null) {
-            this.cmdList = []
+        let map = localStorage.getItem('cmdMap')
+        console.log(map)
+        if (map === null) {
+            this.cmdMap = {}
         } else {
-            this.cmdList = JSON.parse(list)
+            this.cmdMap = JSON.parse(map)
         }
-
     },
     //变更命令内容
     changeText(text) {
@@ -23,8 +22,12 @@ export const store = reactive({
     },
     //保存命令
     saveCmd(name) {
-        let map = {cmdName: name, cmdText: this.cmdText}
-        this.cmdList.push(map)
-        localStorage.setItem('cmdList', JSON.stringify(this.cmdList))
+        this.cmdMap[name] = this.cmdText
+        localStorage.setItem('cmdMap', JSON.stringify(this.cmdMap))
+    },
+    //获取命令
+    getCmdByName(name) {
+        this.cmdText = this.cmdMap[name]
+        return this.cmdText
     }
 })
