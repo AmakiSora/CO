@@ -26,12 +26,21 @@ export default {
   methods: {
     // 保存命令到本地
     saveCommand() {
+      if (store.cmdText===null || store.cmdText === ''){
+        ElNotification.error({
+          title: '命令不能为空!',
+          showClose: false
+        })
+        return
+      }
       ElMessageBox.prompt('', {
         title: '命令另存为',
         message: '',
         type: 'info',
         confirmButtonText: '确定',
         cancelButtonText: '取消',
+        inputPattern: /\S/,
+        inputErrorMessage: '存储标签不能为空!',
         center: true,
         showClose: false
       })
